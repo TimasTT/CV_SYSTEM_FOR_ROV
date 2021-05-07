@@ -2,8 +2,8 @@
 // Created by timas on 07.05.2021.
 //
 
-#ifndef CV_SYSTEM_FOR_ROV_PERSPECTIVE_TRANSFORMATION_H
-#define CV_SYSTEM_FOR_ROV_PERSPECTIVE_TRANSFORMATION_H
+#ifndef CV_SYSTEM_FOR_ROV_PERSPECTIVE_TRANSFORMATION_HPP
+#define CV_SYSTEM_FOR_ROV_PERSPECTIVE_TRANSFORMATION_HPP
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc.hpp>
@@ -36,4 +36,4 @@ public:
     void CameraPointsToWorldPointsCombination() override;
 };
 
-#endif //CV_SYSTEM_FOR_ROV_PERSPECTIVE_TRANSFORMATION_H
+#endif //CV_SYSTEM_FOR_ROV_PERSPECTIVE_TRANSFORMATION_HPP

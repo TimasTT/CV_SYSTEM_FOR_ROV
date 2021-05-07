@@ -5,7 +5,7 @@
 #include <iostream>
 #include <img_processing.hpp>
 
-#include "perspective_transformation.h"
+#include "perspective_transformation.hpp"
 
 ImageProcessed::ImageProcessed(const std::string &filename) {
     Img = cv::imread(filename, 0);
