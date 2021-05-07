@@ -1,6 +1,8 @@
 add_library(img_processing STATIC
         include/img_processing.hpp
-        source/img_processing.cpp)
+        source/img_processing.cpp
+        include/perspective_transformation.h
+        source/perspective_transformation.cpp)
 
 target_include_directories(img_processing PUBLIC include)
 

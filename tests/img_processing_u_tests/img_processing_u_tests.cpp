@@ -9,8 +9,7 @@
 TEST(ImgBinarisation, FilterTest) {
     std::string filename = "../../../images/image1.png";
     ImageProcessed myImg(filename);
-    myImg.FilterCompute();
-    myImg.CentrePixelCoordinatesDetection();
+    myImg.FindWorldCoordinates();
 }
 
 int main(int argc, char **argv) {

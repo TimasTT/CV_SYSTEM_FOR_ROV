@@ -9,15 +9,21 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 
+#include "perspective_transformation.h"
+
 class ImageProcessed {
     cv::Mat Img;
     std::vector<std::vector<cv::Point>> Contours;
-
-public:
-    explicit ImageProcessed(const std::string& filename);
+    std::vector<cv::Point> Centers;
 
     void FilterCompute();
+
     void CentrePixelCoordinatesDetection();
+
+public:
+    explicit ImageProcessed(const std::string &filename);
+
+    void FindWorldCoordinates();
 };
 
 #endif //CV_SYSTEM_FOR_ROV_IMG_PROCESSING_HPP

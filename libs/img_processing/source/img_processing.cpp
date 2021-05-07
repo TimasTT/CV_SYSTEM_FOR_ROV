@@ -5,8 +5,24 @@
 #include <iostream>
 #include <img_processing.hpp>
 
+#include "perspective_transformation.h"
+
 ImageProcessed::ImageProcessed(const std::string &filename) {
     Img = cv::imread(filename, 0);
+}
+
+void ImageProcessed::FindWorldCoordinates() {
+    FilterCompute();
+    CentrePixelCoordinatesDetection();
+
+    if (Centers.size() == 4) {
+        std::shared_ptr<P4P> PerspectiveTransformation = std::make_shared<P4P>();
+        PerspectiveTransformation->CameraPointsToWorldPointsCombination();
+    } else if (Centers.size() == 3) {
+        std::shared_ptr<P4P> PerspectiveTransformation = std::make_shared<P4P>();
+        PerspectiveTransformation->CameraPointsToWorldPointsCombination();
+    }
+
 }
 
 void ImageProcessed::FilterCompute() {
@@ -62,19 +78,15 @@ void ImageProcessed::CentrePixelCoordinatesDetection() {
         cv::drawContours(contourImg, Contours, i, colors[i % 3]);
     }
 
-    std::vector<cv::Point> Centers;
-    for (auto & contour : Contours) {
-        int x = 0, y = 0;
-        for (auto & point : contour){
-            x += point.x;
-            y += point.y;
-        }
-        Centers.emplace_back(x /= contour.size(), y /= contour.size());
-    }
-    for (auto & Center : Centers) {
-        contourImg.at<uchar>(131, 68) = 255;
+    for (const auto& contour : Contours) {
+        cv::Moments m = cv::moments(contour);
+        int x = int(m.m10 / m.m00);
+        int y = int(m.m01 / m.m00);
+        cv::circle(contourImg, {x, y}, 1, (0, 0, 255), -1);
+        Centers.emplace_back(x,y);
     }
 
     cv::imshow("Contours", contourImg);
     cv::waitKey(0);
 }
+
