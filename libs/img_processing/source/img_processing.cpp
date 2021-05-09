@@ -9,6 +9,7 @@
 
 ImageProcessed::ImageProcessed(const std::string &filename) {
     Img = cv::imread(filename, 0);
+    cv::resize(Img, Img, cv::Size(640, 640));
 }
 
 void ImageProcessed::FindWorldCoordinates() {
@@ -16,13 +17,14 @@ void ImageProcessed::FindWorldCoordinates() {
     CentrePixelCoordinatesDetection();
 
     if (Centers.size() == 4) {
-        std::shared_ptr<P4P> PerspectiveTransformation = std::make_shared<P4P>();
+        std::shared_ptr<P4P> PerspectiveTransformation = std::make_shared<P4P>(Centers, Img);
         PerspectiveTransformation->CameraPointsToWorldPointsCombination();
     } else if (Centers.size() == 3) {
-        std::shared_ptr<P4P> PerspectiveTransformation = std::make_shared<P4P>();
+        std::shared_ptr<P3P> PerspectiveTransformation = std::make_shared<P3P>();
         PerspectiveTransformation->CameraPointsToWorldPointsCombination();
     }
 
+    cv::waitKey(0);
 }
 
 void ImageProcessed::FilterCompute() {
@@ -61,15 +63,15 @@ void ImageProcessed::FilterCompute() {
         }
     }
 
-    cv::threshold(Img,Img, 0, 255, cv::THRESH_OTSU);
+    cv::threshold(Img, Img, 0, 255, cv::THRESH_OTSU);
 
     cv::imshow("FilterImg", Img);
 }
 
 void ImageProcessed::CentrePixelCoordinatesDetection() {
-    cv::findContours( Img, Contours, cv::RETR_LIST, cv::CHAIN_APPROX_NONE );
+    cv::findContours(Img, Contours, cv::RETR_LIST, cv::CHAIN_APPROX_NONE);
 
-    cv::Mat contourImg(Img.size(), CV_8UC3, cv::Scalar(0,0,0));
+    cv::Mat contourImg(Img.size(), CV_8UC3, cv::Scalar(0, 0, 0));
     cv::Scalar colors[3];
     colors[0] = cv::Scalar(255, 0, 0);
     colors[1] = cv::Scalar(0, 255, 0);
@@ -78,15 +80,18 @@ void ImageProcessed::CentrePixelCoordinatesDetection() {
         cv::drawContours(contourImg, Contours, i, colors[i % 3]);
     }
 
-    for (const auto& contour : Contours) {
+    for (const auto &contour : Contours) {
         cv::Moments m = cv::moments(contour);
         int x = int(m.m10 / m.m00);
         int y = int(m.m01 / m.m00);
         cv::circle(contourImg, {x, y}, 1, (0, 0, 255), -1);
-        Centers.emplace_back(x,y);
+        Centers.emplace_back(x, y);
     }
 
     cv::imshow("Contours", contourImg);
-    cv::waitKey(0);
+    //GeometryImg = std::move(contourImg);
 }
 
+const cv::Mat &ImageProcessed::GetImg() {
+    return Img;
+}

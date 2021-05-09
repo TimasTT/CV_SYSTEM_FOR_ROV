@@ -7,7 +7,7 @@
 #include <img_processing.hpp>
 
 TEST(ImgBinarisation, FilterTest) {
-    std::string filename = "../../../images/image1.png";
+    std::string filename = "../../../images/image4.jpg";
     ImageProcessed myImg(filename);
     myImg.FindWorldCoordinates();
 }

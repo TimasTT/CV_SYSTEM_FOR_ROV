@@ -8,6 +8,9 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
+#include <boost/geometry.hpp>
+#include <boost/geometry/geometries/register/point.hpp>
+#include <boost/geometry/geometries/segment.hpp>
 
 class IPerspectiveTransformation {
 public:
@@ -17,11 +20,17 @@ public:
 };
 
 class P4P: IPerspectiveTransformation {
-    std::vector<cv::Point2f> worldPoints;
-    std::vector<cv::Point2f> cameraPoints;
+    cv::Mat GeometryImg;
+
+    std::vector<cv::Point> worldPoints;
+    std::vector<cv::Point> cameraPoints;
+
+    cv::Point InitialPoint;
+
+    void SearchInitialPoint();
 
 public:
-    explicit P4P();
+    explicit P4P(std::vector<cv::Point> cameraPts, cv::Mat img);
 
     void CameraPointsToWorldPointsCombination() override;
 };

@@ -9,7 +9,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 
-#include "perspective_transformation.h"
+#include "perspective_transformation.hpp"
 
 class ImageProcessed {
     cv::Mat Img;
@@ -24,6 +24,8 @@ public:
     explicit ImageProcessed(const std::string &filename);
 
     void FindWorldCoordinates();
+
+    const cv::Mat &GetImg();
 };
 
 #endif //CV_SYSTEM_FOR_ROV_IMG_PROCESSING_HPP
