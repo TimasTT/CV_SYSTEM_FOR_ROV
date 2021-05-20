@@ -98,19 +98,17 @@ void P4P::SearchInitialPoint() {
 }
 
 void P4P::AngleDefinition() {
-    double k2 = (fourthPoint.y - thirdPoint.y) / (fourthPoint.x - thirdPoint.x);
+    double k2 = (static_cast<double>(fourthPoint.y - thirdPoint.y)) / (static_cast<double >(fourthPoint.x - thirdPoint.x));
     double k1 = 0;
 
     angle = abs(atan((k2 - k1) / (1 + k1 * k2)) * 180.0 / M_PI);
 
-    if (thirdPoint.y <= fourthPoint.y && fourthPoint.x > thirdPoint.x) {
-
-    } else if (thirdPoint.y > fourthPoint.y && fourthPoint.x > thirdPoint.x) {
-        angle -= 90;
-    } else if (fourthPoint.y > thirdPoint.y && thirdPoint.x > fourthPoint.x) {
-        angle += 90;
-    } else if (fourthPoint.y <= thirdPoint.y && thirdPoint.x > fourthPoint.x) {
-        
+    if (thirdPoint.y > fourthPoint.y && fourthPoint.x <= thirdPoint.x) {
+        angle = 180 - angle;
+    } else if (thirdPoint.y <= fourthPoint.y && fourthPoint.x <= thirdPoint.x) {
+        angle = 180 + angle;
+    } else if (thirdPoint.y <= fourthPoint.y && fourthPoint.x > thirdPoint.x) {
+        angle = 360 - angle;
     }
 
     std::cout << angle << std::endl;
