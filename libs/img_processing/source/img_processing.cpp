@@ -9,7 +9,7 @@
 
 ImageProcessed::ImageProcessed(const std::string &filename) {
     Img = cv::imread(filename, 0);
-    cv::resize(Img, Img, cv::Size(640, 640));
+    //cv::resize(Img, Img, cv::Size(640, 640));
 }
 
 void ImageProcessed::FindWorldCoordinates() {
@@ -72,19 +72,15 @@ void ImageProcessed::CentrePixelCoordinatesDetection() {
     cv::findContours(Img, Contours, cv::RETR_LIST, cv::CHAIN_APPROX_NONE);
 
     cv::Mat contourImg(Img.size(), CV_8UC3, cv::Scalar(0, 0, 0));
-    cv::Scalar colors[3];
-    colors[0] = cv::Scalar(255, 0, 0);
-    colors[1] = cv::Scalar(0, 255, 0);
-    colors[2] = cv::Scalar(0, 0, 255);
     for (size_t i = 0; i < Contours.size(); i++) {
-        cv::drawContours(contourImg, Contours, i, colors[i % 3]);
+        cv::drawContours(contourImg, Contours, i, cv::Scalar(255, 0, 0));
     }
 
     for (const auto &contour : Contours) {
         cv::Moments m = cv::moments(contour);
         int x = int(m.m10 / m.m00);
         int y = int(m.m01 / m.m00);
-        cv::circle(contourImg, {x, y}, 1, (0, 0, 255), -1);
+        cv::circle(contourImg, {x, y}, 1, cv::Scalar(255, 0, 0), -1);
         Centers.emplace_back(x, y);
     }
 

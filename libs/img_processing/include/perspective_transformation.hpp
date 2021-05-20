@@ -27,7 +27,18 @@ class P4P: IPerspectiveTransformation {
 
     cv::Point InitialPoint;
 
+    cv::Point firstPoint;  // red
+    cv::Point secondPoint;  // blue
+    cv::Point thirdPoint;  // green
+    cv::Point fourthPoint;  // brown
+
+    double angle;
+
     void SearchInitialPoint();
+
+    void DefinitionPoints();
+
+    void AngleDefinition();
 
 public:
     explicit P4P(std::vector<cv::Point> cameraPts, cv::Mat img);
