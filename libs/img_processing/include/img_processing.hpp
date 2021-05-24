@@ -16,6 +16,8 @@ class ImageProcessed {
     std::vector<std::vector<cv::Point>> Contours;
     std::vector<cv::Point> Centers;
 
+    std::shared_ptr<P4P> PerspectiveTransformation;
+
     void FilterCompute();
 
     void CentrePixelCoordinatesDetection();

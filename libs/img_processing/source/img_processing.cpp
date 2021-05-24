@@ -16,13 +16,12 @@ void ImageProcessed::FindWorldCoordinates() {
     FilterCompute();
     CentrePixelCoordinatesDetection();
 
-    if (Centers.size() == 4) {
-        std::shared_ptr<P4P> PerspectiveTransformation = std::make_shared<P4P>(Centers, Img);
-        PerspectiveTransformation->CameraPointsToWorldPointsCombination();
-    } else if (Centers.size() == 3) {
-        std::shared_ptr<P3P> PerspectiveTransformation = std::make_shared<P3P>();
-        PerspectiveTransformation->CameraPointsToWorldPointsCombination();
+    if (Centers.size() != 4) {
+        return;
     }
+
+    PerspectiveTransformation = std::make_shared<P4P>(Centers, Img);
+    PerspectiveTransformation->CameraPointsToWorldPointsCombination();
 
     cv::waitKey(0);
 }
@@ -62,8 +61,6 @@ void ImageProcessed::FilterCompute() {
             }
         }
     }
-
-    cv::threshold(Img, Img, 0, 255, cv::THRESH_OTSU);
 
     cv::imshow("FilterImg", Img);
 }

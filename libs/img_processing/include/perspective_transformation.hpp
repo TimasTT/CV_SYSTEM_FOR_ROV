@@ -12,14 +12,7 @@
 #include <boost/geometry/geometries/register/point.hpp>
 #include <boost/geometry/geometries/segment.hpp>
 
-class IPerspectiveTransformation {
-public:
-    virtual ~IPerspectiveTransformation() = default;
-
-    virtual void CameraPointsToWorldPointsCombination() = 0;
-};
-
-class P4P: IPerspectiveTransformation {
+class P4P {
     cv::Mat GeometryImg;
 
     std::vector<cv::Point> worldPoints;
@@ -43,17 +36,7 @@ class P4P: IPerspectiveTransformation {
 public:
     explicit P4P(std::vector<cv::Point> cameraPts, cv::Mat img);
 
-    void CameraPointsToWorldPointsCombination() override;
-};
-
-class P3P: IPerspectiveTransformation {
-    std::vector<cv::Point2f> worldPoints;
-    std::vector<cv::Point2f> cameraPoints;
-
-public:
-    explicit P3P();
-
-    void CameraPointsToWorldPointsCombination() override;
+    void CameraPointsToWorldPointsCombination();
 };
 
 #endif //CV_SYSTEM_FOR_ROV_PERSPECTIVE_TRANSFORMATION_HPP

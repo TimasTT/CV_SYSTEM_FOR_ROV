@@ -19,8 +19,8 @@ P4P::P4P(std::vector<cv::Point> cameraPts, cv::Mat img) {
 
 void P4P::CameraPointsToWorldPointsCombination() {
     DefinitionPoints();
-    SearchInitialPoint();
     AngleDefinition();
+    SearchInitialPoint();
 }
 
 void P4P::DefinitionPoints() {
@@ -80,6 +80,8 @@ void P4P::DefinitionPoints() {
     cv::circle(GeometryImg, {secondPoint.x, secondPoint.y}, 8, cv::Scalar(255, 0, 0), -1);
     cv::circle(GeometryImg, {thirdPoint.x, thirdPoint.y}, 8, cv::Scalar(0, 255, 0), -1);
     cv::circle(GeometryImg, {fourthPoint.x, fourthPoint.y}, 8, cv::Scalar(0, 0, 128), -1);
+
+    cv::imshow("Points", GeometryImg);
 }
 
 void P4P::SearchInitialPoint() {
@@ -106,19 +108,10 @@ void P4P::AngleDefinition() {
     if (thirdPoint.y > fourthPoint.y && fourthPoint.x <= thirdPoint.x) {
         angle = 180 - angle;
     } else if (thirdPoint.y <= fourthPoint.y && fourthPoint.x <= thirdPoint.x) {
-        angle = 180 + angle;
+        angle = -180 + angle;
     } else if (thirdPoint.y <= fourthPoint.y && fourthPoint.x > thirdPoint.x) {
-        angle = 360 - angle;
+        angle = -angle;
     }
 
-    std::cout << angle << std::endl;
-}
-
-
-P3P::P3P() {
-
-}
-
-void P3P::CameraPointsToWorldPointsCombination() {
-
+    std::cout << "Angle: "<< angle << std::endl;
 }
