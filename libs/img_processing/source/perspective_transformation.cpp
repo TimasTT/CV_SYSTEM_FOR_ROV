@@ -6,7 +6,9 @@
 
 BOOST_GEOMETRY_REGISTER_POINT_2D(cv::Point, int, boost::geometry::cs::cartesian, x, y)
 
-P4P::P4P(std::vector<cv::Point> cameraPts, cv::Mat img) {
+P4P::P4P() = default;
+
+P4P::P4P(std::vector<cv::Point> cameraPts, const cv::Mat& img) {
     cv::Mat gImg(img.size(), CV_8UC3, cv::Scalar(0, 0, 0));
     GeometryImg = std::move(gImg);
 
@@ -81,7 +83,7 @@ void P4P::DefinitionPoints() {
     cv::circle(GeometryImg, {thirdPoint.x, thirdPoint.y}, 8, cv::Scalar(0, 255, 0), -1);
     cv::circle(GeometryImg, {fourthPoint.x, fourthPoint.y}, 8, cv::Scalar(0, 0, 128), -1);
 
-    cv::imshow("Points", GeometryImg);
+    //cv::imshow("Points", GeometryImg);
 }
 
 void P4P::SearchInitialPoint() {
@@ -96,7 +98,7 @@ void P4P::SearchInitialPoint() {
     InitialPoint.x = CenterPoint.at(0).x;
     InitialPoint.y = CenterPoint.at(0).y;
 
-    cv::imshow("Geometry", GeometryImg);
+    //cv::imshow("Geometry", GeometryImg);
 }
 
 void P4P::AngleDefinition() {

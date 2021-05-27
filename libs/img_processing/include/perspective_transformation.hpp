@@ -34,7 +34,8 @@ class P4P {
     void AngleDefinition();
 
 public:
-    explicit P4P(std::vector<cv::Point> cameraPts, cv::Mat img);
+    P4P();
+    explicit P4P(std::vector<cv::Point> cameraPts, const cv::Mat& img);
 
     void CameraPointsToWorldPointsCombination();
 };

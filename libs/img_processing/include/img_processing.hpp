@@ -23,6 +23,7 @@ class ImageProcessed {
     void CentrePixelCoordinatesDetection();
 
 public:
+    ImageProcessed();
     explicit ImageProcessed(const std::string &filename);
 
     void FindWorldCoordinates();

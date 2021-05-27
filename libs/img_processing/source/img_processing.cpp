@@ -7,8 +7,9 @@
 
 #include "perspective_transformation.hpp"
 
-ImageProcessed::ImageProcessed(const std::string &filename) {
-    Img = cv::imread(filename, 0);
+ImageProcessed::ImageProcessed() = default;
+
+ImageProcessed::ImageProcessed(const std::string &filename): Img(cv::imread(filename, 0)) {
     //cv::resize(Img, Img, cv::Size(640, 640));
 }
 
@@ -23,14 +24,15 @@ void ImageProcessed::FindWorldCoordinates() {
     PerspectiveTransformation = std::make_shared<P4P>(Centers, Img);
     PerspectiveTransformation->CameraPointsToWorldPointsCombination();
 
-    cv::waitKey(0);
+    //cv::waitKey(0);
 }
 
 void ImageProcessed::FilterCompute() {
-    cv::imshow("StartImg", Img);
+    //cv::imshow("StartImg", Img);
 
-    cv::GaussianBlur(Img, Img, cv::Size_(7, 7), Img.rows, Img.rows);
-    cv::imshow("BlurImg", Img);
+    //cv::GaussianBlur(Img, Img, cv::Size_(7, 7), 0, 0); - ...!
+    cv::blur(Img, Img, cv::Size_(7, 7));
+    //cv::imshow("BlurImg", Img);
 
     int bins_num = 256;
     std::vector<int> histogram(bins_num);
@@ -62,7 +64,7 @@ void ImageProcessed::FilterCompute() {
         }
     }
 
-    cv::imshow("FilterImg", Img);
+    //cv::imshow("FilterImg", Img);
 }
 
 void ImageProcessed::CentrePixelCoordinatesDetection() {
@@ -81,10 +83,12 @@ void ImageProcessed::CentrePixelCoordinatesDetection() {
         Centers.emplace_back(x, y);
     }
 
-    cv::imshow("Contours", contourImg);
+    //cv::imshow("Contours", contourImg);
     //GeometryImg = std::move(contourImg);
 }
 
 const cv::Mat &ImageProcessed::GetImg() {
     return Img;
 }
+
+
