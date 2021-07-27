@@ -1,0 +1,62 @@
+\hypertarget{classP4P}{}\doxysection{P4P Class Reference}
+\label{classP4P}\index{P4P@{P4P}}
+
+
+Class for finding the angle of rotation of a special marker on the image.  
+
+
+
+
+{\ttfamily \#include $<$perspective\+\_\+transformation.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classP4P_a5521aba73f8b0ee497819d5f1ca3475e}{P4P}} (std\+::vector$<$ cv\+::\+Point $>$ camera\+Pts, const cv\+::\+Mat \&img)
+\begin{DoxyCompactList}\small\item\em Constructor of the class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classP4P_a208eb684fb42574f2071282cc730d244}{Camera\+Points\+To\+World\+Points\+Combination}} ()
+\begin{DoxyCompactList}\small\item\em Defining the angle of rotation of the special marker. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for finding the angle of rotation of a special marker on the image. 
+
+This class this class determines the angle of rotation of a special marker on the image by identifying special beacons that are located in the form of an asymmetrical figure. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classP4P_a5521aba73f8b0ee497819d5f1ca3475e}\label{classP4P_a5521aba73f8b0ee497819d5f1ca3475e}} 
+\index{P4P@{P4P}!P4P@{P4P}}
+\index{P4P@{P4P}!P4P@{P4P}}
+\doxysubsubsection{\texorpdfstring{P4P()}{P4P()}}
+{\footnotesize\ttfamily P4\+P\+::\+P4P (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Point $>$}]{camera\+Pts,  }\item[{const cv\+::\+Mat \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor of the class. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em camera\+Pts} & Coordinates of special beacons \\
+\hline
+\mbox{\texttt{ in}}  & {\em img} & Filtered image \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classP4P_a208eb684fb42574f2071282cc730d244}\label{classP4P_a208eb684fb42574f2071282cc730d244}} 
+\index{P4P@{P4P}!CameraPointsToWorldPointsCombination@{CameraPointsToWorldPointsCombination}}
+\index{CameraPointsToWorldPointsCombination@{CameraPointsToWorldPointsCombination}!P4P@{P4P}}
+\doxysubsubsection{\texorpdfstring{CameraPointsToWorldPointsCombination()}{CameraPointsToWorldPointsCombination()}}
+{\footnotesize\ttfamily void P4\+P\+::\+Camera\+Points\+To\+World\+Points\+Combination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Defining the angle of rotation of the special marker. 
+
+The angle is determined using the found coordinates of special beacons and transferred to the R\+OV control system. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/img\+\_\+processing/include/perspective\+\_\+transformation.\+hpp\item 
+libs/img\+\_\+processing/source/perspective\+\_\+transformation.\+cpp\end{DoxyCompactItemize}

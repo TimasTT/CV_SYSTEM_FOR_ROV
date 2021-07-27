@@ -11,6 +11,13 @@
 
 #include "perspective_transformation.hpp"
 
+/**
+ * \brief Class for image filtering
+ *
+ * In this class, the image is filtered, blurred, binarized,
+ * and the contours of special beacons are searched on it.
+ */
+
 class ImageProcessed {
     cv::Mat Img;
     std::vector<std::vector<cv::Point>> Contours;
@@ -24,9 +31,29 @@ class ImageProcessed {
 
 public:
     ImageProcessed();
+
+    /**
+     * \brief Constructor of the class
+     *
+     * \param[in] filename Path to your image
+     */
+
     ImageProcessed(const std::string &filename);
 
+    /**
+     * \brief Image filtering and coordinates searching
+     *
+     * Filtering for more successful finding the special marker on it.
+     * Searching contours of special beacons of marker and theirs coordinates on image.
+     */
+
     void FindWorldCoordinates();
+
+    /**
+     * \brief Receiving processed image.
+     *
+     * \return Processed image with searched contours of special beacons.
+     */
 
     const cv::Mat &GetImg();
 };

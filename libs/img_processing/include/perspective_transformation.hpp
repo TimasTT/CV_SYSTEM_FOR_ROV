@@ -12,6 +12,13 @@
 #include <boost/geometry/geometries/register/point.hpp>
 #include <boost/geometry/geometries/segment.hpp>
 
+/**
+ * \brief Class for finding the angle of rotation of a special marker on the image.
+ *
+ * This class this class determines the angle of rotation of a special marker on the image
+ * by identifying special beacons that are located in the form of an asymmetrical figure.
+ */
+
 class P4P {
     cv::Mat GeometryImg;
 
@@ -35,7 +42,22 @@ class P4P {
 
 public:
     P4P();
+
+    /**
+     * \brief Constructor of the class
+     *
+     * \param[in] cameraPts Coordinates of special beacons
+     * \param[in] img Filtered image
+     */
+
     explicit P4P(std::vector<cv::Point> cameraPts, const cv::Mat& img);
+
+    /**
+     * \brief Defining the angle of rotation of the special marker
+     *
+     * The angle is determined using the found coordinates of special beacons
+     * and transferred to the ROV control system.
+     */
 
     void CameraPointsToWorldPointsCombination();
 };

@@ -1,0 +1,75 @@
+\hypertarget{classImageProcessed}{}\doxysection{Image\+Processed Class Reference}
+\label{classImageProcessed}\index{ImageProcessed@{ImageProcessed}}
+
+
+Class for image filtering.  
+
+
+
+
+{\ttfamily \#include $<$img\+\_\+processing.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classImageProcessed_a1e1d6e741230eb74410d179a7d1a9124}{Image\+Processed}} (const std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Constructor of the class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classImageProcessed_ac1b4cc8b3967188ce4d3188982d20ac6}{Find\+World\+Coordinates}} ()
+\begin{DoxyCompactList}\small\item\em Image filtering and coordinates searching. \end{DoxyCompactList}\item 
+const cv\+::\+Mat \& \mbox{\hyperlink{classImageProcessed_a249e7a6579afcc220f749720f7e06c41}{Get\+Img}} ()
+\begin{DoxyCompactList}\small\item\em Receiving processed image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for image filtering. 
+
+In this class, the image is filtered, blurred, binarized, and the contours of special beacons are searched on it. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classImageProcessed_a1e1d6e741230eb74410d179a7d1a9124}\label{classImageProcessed_a1e1d6e741230eb74410d179a7d1a9124}} 
+\index{ImageProcessed@{ImageProcessed}!ImageProcessed@{ImageProcessed}}
+\index{ImageProcessed@{ImageProcessed}!ImageProcessed@{ImageProcessed}}
+\doxysubsubsection{\texorpdfstring{ImageProcessed()}{ImageProcessed()}}
+{\footnotesize\ttfamily Image\+Processed\+::\+Image\+Processed (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Constructor of the class. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em filename} & Path to your image \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classImageProcessed_ac1b4cc8b3967188ce4d3188982d20ac6}\label{classImageProcessed_ac1b4cc8b3967188ce4d3188982d20ac6}} 
+\index{ImageProcessed@{ImageProcessed}!FindWorldCoordinates@{FindWorldCoordinates}}
+\index{FindWorldCoordinates@{FindWorldCoordinates}!ImageProcessed@{ImageProcessed}}
+\doxysubsubsection{\texorpdfstring{FindWorldCoordinates()}{FindWorldCoordinates()}}
+{\footnotesize\ttfamily void Image\+Processed\+::\+Find\+World\+Coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Image filtering and coordinates searching. 
+
+Filtering for more successful finding the special marker on it. Searching contours of special beacons of marker and theirs coordinates on image. \mbox{\Hypertarget{classImageProcessed_a249e7a6579afcc220f749720f7e06c41}\label{classImageProcessed_a249e7a6579afcc220f749720f7e06c41}} 
+\index{ImageProcessed@{ImageProcessed}!GetImg@{GetImg}}
+\index{GetImg@{GetImg}!ImageProcessed@{ImageProcessed}}
+\doxysubsubsection{\texorpdfstring{GetImg()}{GetImg()}}
+{\footnotesize\ttfamily const cv\+::\+Mat \& Image\+Processed\+::\+Get\+Img (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Receiving processed image. 
+
+\begin{DoxyReturn}{Returns}
+Processed image with searched contours of special beacons. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/img\+\_\+processing/include/img\+\_\+processing.\+hpp\item 
+libs/img\+\_\+processing/source/img\+\_\+processing.\+cpp\end{DoxyCompactItemize}
