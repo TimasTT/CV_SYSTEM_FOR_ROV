@@ -10,7 +10,7 @@ P4P::P4P() = default;
 
 P4P::P4P(std::vector<cv::Point> cameraPts, const cv::Mat& img) {
     cv::Mat gImg(img.size(), CV_8UC3, cv::Scalar(0, 0, 0));
-    GeometryImg = std::move(gImg);
+    GeometryImg = std::forward<cv::Mat>(gImg);
 
     cameraPoints = std::move(cameraPts);
     worldPoints.emplace_back(16, 16);
@@ -39,7 +39,7 @@ void P4P::DefinitionPoints() {
         }
     }
 
-    auto Comp {[](const int &firstLen, const int &secondLen, const int &thirdLen) {
+    auto Comp {[&](const auto &firstLen, const auto &secondLen, const auto &thirdLen) {
         if (firstLen > secondLen && firstLen > thirdLen) {
             return 1;
         } else if (firstLen < secondLen && secondLen > thirdLen) {
@@ -83,7 +83,7 @@ void P4P::DefinitionPoints() {
     cv::circle(GeometryImg, {thirdPoint.x, thirdPoint.y}, 8, cv::Scalar(0, 255, 0), -1);
     cv::circle(GeometryImg, {fourthPoint.x, fourthPoint.y}, 8, cv::Scalar(0, 0, 128), -1);
 
-    //cv::imshow("Points", GeometryImg);
+    cv::imshow("Points", GeometryImg);
 }
 
 void P4P::SearchInitialPoint() {
@@ -115,5 +115,5 @@ void P4P::AngleDefinition() {
         angle = -angle;
     }
 
-    std::cout << "Angle: "<< angle << std::endl;
+    std::cout << "Angle: "<< angle + 1.27303 << std::endl;
 }

@@ -24,7 +24,7 @@ class ImageProcessed {
 
 public:
     ImageProcessed();
-    explicit ImageProcessed(const std::string &filename);
+    ImageProcessed(const std::string &filename);
 
     void FindWorldCoordinates();
 

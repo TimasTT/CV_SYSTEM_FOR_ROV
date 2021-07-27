@@ -24,11 +24,11 @@ void ImageProcessed::FindWorldCoordinates() {
     PerspectiveTransformation = std::make_shared<P4P>(Centers, Img);
     PerspectiveTransformation->CameraPointsToWorldPointsCombination();
 
-    //cv::waitKey(0);
+    cv::waitKey(0);
 }
 
 void ImageProcessed::FilterCompute() {
-    //cv::imshow("StartImg", Img);
+    cv::imshow("StartImg", Img);
 
     //cv::GaussianBlur(Img, Img, cv::Size_(7, 7), 0, 0); - ...!
     cv::blur(Img, Img, cv::Size_(7, 7));
@@ -36,9 +36,7 @@ void ImageProcessed::FilterCompute() {
 
     int bins_num = 256;
     std::vector<int> histogram(bins_num);
-    for (auto &i : histogram) {
-        i = 0;
-    }
+    std::fill(histogram.begin(), histogram.end(), 0);
 
     for (int y = 0; y < Img.rows; ++y) {
         for (int x = 0; x < Img.cols; ++x) {
@@ -48,11 +46,10 @@ void ImageProcessed::FilterCompute() {
 
     auto max_bin = std::max_element(histogram.begin() + 200, histogram.end());
     int cnt = 0;
-    for (int i = 220; i < histogram.size(); ++i) {
-        if (histogram[i] * 10 > *max_bin) {
-            cnt++;
-        }
-    }
+
+    cnt = std::count_if(histogram.begin() + 200, histogram.end(), [&](const auto& i){
+        return i * 10 > *max_bin;
+    });
 
     for (int y = 0; y < Img.rows; y++) {
         for (int x = 0; x < Img.cols; x++) {
@@ -83,7 +80,7 @@ void ImageProcessed::CentrePixelCoordinatesDetection() {
         Centers.emplace_back(x, y);
     }
 
-    //cv::imshow("Contours", contourImg);
+    cv::imshow("Contours", contourImg);
     //GeometryImg = std::move(contourImg);
 }
 
